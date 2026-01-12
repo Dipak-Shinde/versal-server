@@ -44,5 +44,6 @@ app.use("/api/categories", categoryRoutes);
 
 
 app.use(errorHandler);
-
-export default app;
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
+});
