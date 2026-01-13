@@ -20,14 +20,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 //middleware 
 
-app.use(
-  cors({
-    origin: "https://versal-client-beta.vercel.app", // frontend
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://versal-client-beta.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    // allow localhost
+    if (origin.startsWith("http://localhost")) return callback(null, true);
+
+    // allow ALL vercel deployments
+    if (origin.endsWith(".vercel.app")) return callback(null, true);
+
+    callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true
+}));
 
 app.use("/uploads", express.static("uploads"));
 
