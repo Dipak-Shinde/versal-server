@@ -21,14 +21,17 @@ const __dirname = path.dirname(__filename);
 
 // CORS
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (origin.startsWith("http://localhost")) return callback(null, true);
-    if (origin.endsWith(".vercel.app")) return callback(null, true);
-    callback(new Error("Not allowed by CORS"));
-  },
+  origin: [
+    "http://localhost:5173",
+    "https://versal-client-beta.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+// 🔥 MUST handle preflight
+app.options("*", cors());
 
 // Middleware
 app.use(express.json());
