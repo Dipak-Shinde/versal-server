@@ -12,11 +12,10 @@ import categoryRoutes from "./routes/category.routes.js"
 dotenv.config();
 
 connectDB().then(() => {
-  app.listen(process.env.PORT || 8080, () => {
-    console.log("Server running");
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
 });
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
