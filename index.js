@@ -10,7 +10,12 @@ import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/category.routes.js"
 dotenv.config();
-connectDB();
+
+connectDB().then(() => {
+  app.listen(process.env.PORT || 8080, () => {
+    console.log("Server running");
+  });
+});
 
 
 const app = express();
