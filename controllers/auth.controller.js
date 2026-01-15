@@ -92,7 +92,6 @@ export const logout = async (req, res, next) => {
   }
 };
 
-
 /* UPDATE PROFILE */
 export const updateProfile = async (req, res, next) => {
   try {
